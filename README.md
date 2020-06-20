@@ -1,24 +1,41 @@
-# README
+# cook-note
+This app is a recipe bookmark tool.
+このアプリは、レシピのブックマークができるアプリです。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Table of contents
+* [Features](#Features)
+* [Environment](#Environment)
+* [License](#License)
 
-Things you may want to cover:
+# DEMO
+# Features
 
-* Ruby version
+# Environment
+#### Development Environment
+MacOS
+#### Languages
+* HTML
+* CSS
+* JavaScript
+* Ruby(2.6.5)
+* SQL
+#### main framework
+Ruby on Rails(6.0.3.2)
+#### CSS framework
+bootstrap
+#### JavaScript library
+jQuery
+#### DB
+MySQL
+#### Infrastructure
+heroku
+Docker
+#### Testing framework
+RSpec
+#### Other
+* yarn
+* Node.js
+* Circle CI
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# License
+Miki Fujimori All Rights Reserved  
