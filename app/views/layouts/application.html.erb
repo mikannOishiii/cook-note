@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CookNote</title>
+    <title>Cook-Note</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="app-title navbar-expand-md navbar-light bg-light">
+      <div class="navbar-brand">cook-note</div>
+    <div>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
