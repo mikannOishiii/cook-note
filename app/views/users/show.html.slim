@@ -1,0 +1,10 @@
+h1 ユーザープロフィール
+
+table.table.table-hover
+  tbody
+    tr
+      th= User.human_attribute_name(:name)
+      td= @user.name
+    tr
+      th= User.human_attribute_name(:email)
+      td= @user.email
