@@ -8,12 +8,7 @@ header.navbar.navbar-fixed-top.navbar-inverse.bg-light
         - if logged_in?
           li.nav-item
             = link_to "レシピ一覧", "#", class: "nav-link"
-          li.nav-item.dropdown
-            a href="#" class="dropdown-toggle" data-toggle="dropdown" Account
-            ul.dropdown-menu
-              li = link_to "プロフィール", current_user
-              li = link_to "設定", '#'
-              li.divider
-              li = link_to "ログアウト", logout_path, method: :delete
+          li.nav-item
+            = link_to "ログアウト", logout_path, method: :delete, class: "nav-link"
         - else
           li.nav-item = link_to "ログイン", login_path, class: "nav-link"
