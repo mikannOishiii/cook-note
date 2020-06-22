@@ -77,4 +77,9 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user).not_to be_valid
   end
+
+  it "ダイジェストが存在しない場合のauthenticated?のテスト" do
+    user.authenticated?("")
+    expect(user).to be_truthy
+  end
 end

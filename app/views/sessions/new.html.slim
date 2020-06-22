@@ -1,0 +1,14 @@
+h1 ログインフォーム
+
+= form_with scope: :session, local: true do |f|
+  .form-group
+    = f.label :email, "メールアドレス"
+    = f.email_field :email, class: 'form-control', id: "session_email"
+  .form-group
+    = f.label :password, "パスワード"
+    = f.password_field :password, class: 'form-control', id: "session_password"
+  .form-group
+    = f.label :remember_me, class: "checkbox inline" do
+      = f.check_box :remember_me, id: "session_checkbox"
+      span Remember me on this computer
+  = f.submit "ログイン", class: "btn btn-primary"
