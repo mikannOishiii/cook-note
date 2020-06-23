@@ -17,6 +17,7 @@ RSpec.describe "Sessions", type: :request do
       let(:email) { user.email }
 
       it { is_expected.to eq 302 }
+      
       it { is_expected.to redirect_to root_url }
     end
 
