@@ -8,13 +8,10 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    .app-title.navbar-expand-md.navbar-light.bg-light
-      .navbar-brand
-        | cook-note
-      div
-        .container
-          - flash.each do |message_type, message| 
-            .alert.alert-#{ message_type }
-              = message 
-          = yield
+    = render "layouts/header"
+    .container
+      - flash.each do |message_type, message| 
+        div.alert class="alert-#{message_type}"
+          = message 
+      = yield
     = debug(params) if Rails.env.development?

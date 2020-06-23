@@ -10,8 +10,8 @@ h1 ユーザー新規登録
     = f.email_field :email, class: "form-control", id: "user_email"
   .form-group
     = f.label :password
-    = f.text_field :password, class: "form-control", id: "user_password"
+    = f.password_field :password, class: "form-control", id: "user_password"
   .form-group
     = f.label :password_confirmation
-    = f.text_field :password_confirmation, class: "form-control", id: "user_password_confirmation"
+    = f.password_field :password_confirmation, class: "form-control", id: "user_password_confirmation"
   = f.submit nil, class: "btn btn-primary"

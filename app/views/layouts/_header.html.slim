@@ -1,0 +1,14 @@
+header.navbar.navbar-fixed-top.navbar-inverse.bg-light
+  .container
+    = link_to "sample app", root_path, id: "logo"
+    nav
+      ul.nav.navbar-right.justify-content-end
+        li.nav-item
+          = link_to "Home", root_path, class: "nav-link"
+        - if logged_in?
+          li.nav-item
+            = link_to "レシピ一覧", "#", class: "nav-link"
+          li.nav-item
+            = link_to "ログアウト", logout_path, method: :delete, class: "nav-link"
+        - else
+          li.nav-item = link_to "ログイン", login_path, class: "nav-link"
