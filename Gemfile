@@ -38,6 +38,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'mail-iso-2022-jp'
 end
 
 group :development do

@@ -117,6 +117,8 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    mail-iso-2022-jp (2.0.9)
+      mail (>= 2.2.6, <= 2.7.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
@@ -271,6 +273,7 @@ DEPENDENCIES
   kaminari
   launchy
   listen (~> 3.2)
+  mail-iso-2022-jp
   mysql2 (>= 0.4.4)
   pry-byebug
   pry-rails
