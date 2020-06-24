@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "cook-note へようこそ！!"
+      @user.send_activation_email
+      flash[:info] = "メールアドレスに認証メールを送りました。確認してください。"
       redirect_to root_url
     else
       render 'new'

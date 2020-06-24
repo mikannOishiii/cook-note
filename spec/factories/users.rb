@@ -1,9 +1,11 @@
 FactoryBot.define do
   factory :user do
     name { "testuser" }
-    email { "testuser@example.com" }
+    email { "test@example.com" }
     password { "foobar" }
     password_confirmation { "foobar" }
+    activated { true }
+    activated_at { Time.zone.now }
 
     trait :invalid do
       name { nil }

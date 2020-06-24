@@ -16,9 +16,9 @@ RSpec.describe "ユーザー機能", type: :system do
     context "パラメータが妥当な場合" do
       let(:name) { "testuser" }
 
-      it "登録完了のメッセージが表示される" do
-        expect(page).to have_content "cook-note へようこそ！!"
-      end
+      # it "登録完了のメッセージが表示される" do
+      #   expect(page).to have_content "cook-note へようこそ！!"
+      # end
 
       it "rootにリダイレクトされる" do
         expect(current_path).to eq root_path
