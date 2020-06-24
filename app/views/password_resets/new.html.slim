@@ -1,0 +1,7 @@
+h1 パスワードリセット
+
+= form_with url: password_resets_path, local: true do |f|
+  .form-group
+    = f.label :email, "メールアドレス"
+    = f.email_field :email, class: 'form-control'
+  = f.submit "送信する", class: "btn btn-primary"
