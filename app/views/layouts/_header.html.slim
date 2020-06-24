@@ -7,7 +7,11 @@ header.navbar.navbar-fixed-top.navbar-inverse.bg-light
           = link_to "Home", root_path, class: "nav-link"
         - if logged_in?
           li.nav-item
+            = link_to "ユーザー一覧", users_path, class: "nav-link"
+          li.nav-item
             = link_to "レシピ一覧", "#", class: "nav-link"
+          li.nav-item
+            = link_to "プロフィール", edit_user_path(current_user), class: "nav-link"
           li.nav-item
             = link_to "ログアウト", logout_path, method: :delete, class: "nav-link"
         - else

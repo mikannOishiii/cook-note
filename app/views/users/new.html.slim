@@ -1,17 +1,5 @@
+= provide(:button_text, "登録する")
 h1 ユーザー新規登録
 
-= form_with model: @user, url: signup_path, local: true do |f|
-  = render 'shared/error_messages'
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: "form-control", id: "user_name"
-  .form-group
-    = f.label :email
-    = f.email_field :email, class: "form-control", id: "user_email"
-  .form-group
-    = f.label :password
-    = f.password_field :password, class: "form-control", id: "user_password"
-  .form-group
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation, class: "form-control", id: "user_password_confirmation"
-  = f.submit nil, class: "btn btn-primary"
+.row
+  = render "form", user: @user

@@ -31,10 +31,6 @@ RSpec.describe "ユーザー機能", type: :system do
       it "エラーメッセージが表示される" do
         expect(page).to have_content "ユーザー名を入力してください"
       end
-
-      it "新規登録フォームに戻される" do
-        expect(current_path).to eq signup_path
-      end
     end
   end
 end

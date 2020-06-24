@@ -1,0 +1,9 @@
+= provide(:title, "ユーザー一覧")
+h1 ユーザー一覧
+
+.mb-3
+  = paginate @users
+  = page_entries_info @users
+
+ul.users
+  = render @users
