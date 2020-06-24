@@ -6,6 +6,7 @@ h1 ログインフォーム
     = f.email_field :email, class: 'form-control', id: "session_email"
   .form-group
     = f.label :password, "パスワード"
+    = link_to "(forgot password)", new_password_reset_path
     = f.password_field :password, class: 'form-control', id: "session_password"
   .form-group
     = f.label :remember_me, class: "checkbox inline" do
