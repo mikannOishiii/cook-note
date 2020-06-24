@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'faker'
 gem 'kaminari'
+gem 'mail-iso-2022-jp'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -38,7 +39,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem 'mail-iso-2022-jp'
 end
 
 group :development do
