@@ -36,4 +36,10 @@ RSpec.describe Recipe, type: :model do
     recipe.valid?
     expect(recipe).not_to be_valid
   end
+
+  it "レシピが削除されると関連する材料も削除される" do
+    recipe.save
+    recipe.ingredients.create!(name: "ingredient_name", quantity_amount: "quantity_amount")
+    expect{recipe.destroy}.to change{ Ingredient.count }.by(-1)
+  end
 end

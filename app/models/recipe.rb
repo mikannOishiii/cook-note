@@ -1,5 +1,9 @@
 class Recipe < ApplicationRecord
-  belongs_to :user
+  belongs_to  :user
+  has_many    :ingredients, dependent: :destroy
+
+  accepts_nested_attributes_for :ingredients, allow_destroy: true
+  
   validates :user_id,     presence: true
   validates :name,        presence: true
   validates :description, length: { maximum: 140 }
