@@ -77,4 +77,10 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user).not_to be_valid
   end
+
+  it "ユーザーが削除されると関連するレシピも削除される" do
+    user.save
+    user.recipes.create!(name: "recipe_name")
+    expect{user.destroy}.to change{ Recipe.count }.by(-1)
+  end
 end
