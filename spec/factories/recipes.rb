@@ -2,10 +2,10 @@ FactoryBot.define do
   factory :recipe do
     name { "MyString" }
     description { "MyString" }
-    url { "MyString" }
-    image { "MyString" }
-    recipeYield { "MyString" }
-    cooktime { "MyString" }
-    user { nil }
+    url { "" }
+    image { "" }
+    recipeYield { "2〜3人分" }
+    cooktime { 10 }
+    association :user
   end
 end

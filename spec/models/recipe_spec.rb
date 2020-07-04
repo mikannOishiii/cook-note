@@ -40,12 +40,12 @@ RSpec.describe Recipe, type: :model do
   it "レシピが削除されると関連する材料も削除される" do
     recipe.save
     recipe.ingredients.create!(name: "ingredient_name", quantity_amount: "quantity_amount")
-    expect{recipe.destroy}.to change{ Ingredient.count }.by(-1)
+    expect{ recipe.destroy }.to change{ Ingredient.count }.by(-1)
   end
 
   it "レシピが削除されると関連する作り方も削除される" do
     recipe.save
-    recipe.how_to_steps.create!(sort_order: 1, body: "how_to_steps_description")
-    expect{recipe.destroy}.to change{ HowToStep.count }.by(-1)
+    recipe.steps.create!(body: "steps_description")
+    expect{ recipe.destroy }.to change{ Step.count }.by(-1)
   end
 end

@@ -1,0 +1,45 @@
+h1 レシピ内容の確認
+
+table.table.table-hover
+  tbody
+    tr
+      th= Recipe.human_attribute_name(:name)
+      td= @recipe.name
+    tr
+      th= Recipe.human_attribute_name(:description)
+      td= simple_format(@recipe.description)
+    tr
+      th= Recipe.human_attribute_name(:url)
+      td= @recipe.url
+    tr
+      th= Recipe.human_attribute_name(:recipeYield)
+      td= @recipe.recipeYield
+    tr
+      th= Recipe.human_attribute_name(:cooktime)
+      td= "#{@recipe.cooktime} 分"
+    - @recipe.ingredients.each do |ingredient|
+      tr
+        th=
+        td= "#{ingredient.name}:#{ingredient.quantity_amount}"
+
+    - @recipe.steps.each do |step|
+      tr
+        th=
+        td= step.body
+
+= form_with model: @recipe, local: true do |f|
+  = f.hidden_field :name
+  = f.hidden_field :description
+  = f.hidden_field :url
+  = f.hidden_field :recipeYield
+  = f.hidden_field :cooktime
+  = f.fields_for :ingredients do |a|
+    = a.hidden_field :name
+    = a.hidden_field :quantity_amount
+    = a.hidden_field :_destroy
+  = f.fields_for :steps do |b|
+    = b.hidden_field :body
+    = b.hidden_field :_destroy
+     
+  = f.submit "戻る", name: "back", class: "btn btn-secondary mr-3"
+  = f.submit "登録", name: "save", class: "btn btn-primary"

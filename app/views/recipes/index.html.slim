@@ -1,0 +1,15 @@
+h1 レシピ一覧
+
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Recipe.human_attribute_name(:name)
+      th
+      th
+  tbody
+    - @recipes.each do |recipe|
+      tr
+        td= link_to recipe.name, recipe
+        td
+          = link_to "編集", edit_recipe_path(recipe), class: "btn btn-primary mr-3"
+          = link_to "削除", recipe, method: :delete, data: { confirm: "削除してもよいですか？" }, class: "btn btn-danger"

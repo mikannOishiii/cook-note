@@ -1,0 +1,10 @@
+h1 レシピの編集
+
+.nav.justify-content-end
+  = link_to "一覧", recipes_path, class:"nav-link"
+- if @recipe.errors.present?
+  ul#error_explanation
+    - @recipe.errors.full_messages.each do |message|
+      li= message
+
+= render "form", recipe: @recipe
