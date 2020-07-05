@@ -48,46 +48,34 @@ RSpec.describe "Recipes", type: :request do
     end
   end
 
-  # describe "PUT /update" do
-  #   let!(:recipe) { create(:recipe, name: "サバの味噌煮") }
-  #   let(:valid_attributes) do
-  #     { name: "サバの甘辛煮" }
-  #   end
-  #   let(:invalid_attributes) do
-  #     { name: "" }
-  #   end
+  describe "PUT /update" do
+    let(:recipe) { user.recipes.create(name: "サバの味噌煮") }
 
-  #   context "パラメータが妥当な場合" do
-  #     subject { put recipe_url(recipe.id), params: 
-  #       { id: recipe.id, recipe: valid_attributes } }
+    context "パラメータが妥当な場合" do
+      subject { put recipe_url recipe, params: { recipe: { id: recipe.id, name: "サバの甘辛煮" } } }
 
-  #     it { is_expected.to eq 302 }
+      it { is_expected.to eq 302 }
 
-  #     it { expect { subject }.to change {
-  #       Recipe.find(recipe.id).name }.from("サバの味噌煮").to("サバの甘辛煮")
-  #     }
+      it { expect { subject }.to change {
+        Recipe.find(recipe.id).name }.from("サバの味噌煮").to("サバの甘辛煮")
+      }
 
-  #     it { is_expected.to redirect_to Recipe.last }
-  #   end
+      it { is_expected.to redirect_to Recipe.last }
+    end
 
-  #   context "パラメータが不正な場合" do
-  #     # subject { patch recipe_url recipe.id, params: { recipe: attributes_for(:recipe, name: "") } }
-  #     # subject { put recipe_url recipe, params:
-  #     #   { id: recipe.id, recipe: attributes_for(:recipe, name: "") }
-  #     # }
-  #     subject { put recipe_url(recipe.id), params: {
-  #       id: recipe.id, recipe: invalid_attributes } }
+    context "パラメータが不正な場合" do
+      subject { put recipe_url recipe, params: { recipe: { id: recipe.id, name: "" } } }
 
-  #     it { is_expected.to eq 200 }
+      it { is_expected.to eq 200 }
 
-  #     it { expect { subject }.not_to change(Recipe.find(recipe.id), :name) }
+      it { expect { subject }.not_to change(Recipe.find(recipe.id), :name) }
 
-  #     it "エラーが表示されること" do
-  #       subject
-  #       expect(response.body).to include "レシピ名を入力してください"
-  #     end
-  #   end  
-  # end
+      it "エラーが表示されること" do
+        subject
+        expect(response.body).to include "レシピ名を入力してください"
+      end
+    end  
+  end
 
   describe "DELETE #destroy" do
     let!(:recipe) { user.recipes.create(name: "recipe_name") }
