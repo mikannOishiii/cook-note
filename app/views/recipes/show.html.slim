@@ -1,0 +1,32 @@
+h1 レシピ
+
+table.table.table-hover
+  tbody
+    tr
+      th= Recipe.human_attribute_name(:name)
+      td= @recipe.name
+    tr
+      th= Recipe.human_attribute_name(:description)
+      td= @recipe.description
+    tr
+      th= Recipe.human_attribute_name(:url)
+      td= @recipe.url
+    tr
+      th= Recipe.human_attribute_name(:recipeYield)
+      td= @recipe.recipeYield
+    tr
+      th= Recipe.human_attribute_name(:cooktime)
+      td= @recipe.cooktime
+    - @recipe.ingredients.each do |ingredient|
+        tr
+          th=
+          td= "#{ingredient.name} : #{ingredient.quantity_amount}"
+    - @recipe.steps.each_with_index do |step, index|
+        tr
+          th= index + 1
+          td= step.body
+
+= link_to "編集", edit_recipe_path(@recipe), class: "btn btn-primary mr-3"
+= link_to "削除", @recipe, method: :delete,
+                          data: { confirm: "レシピ「#{@recipe.name}」を削除します。よろしいですか？" },
+                          class: "btn btn-danger"

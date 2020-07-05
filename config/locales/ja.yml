@@ -17,6 +17,23 @@ ja:
         password_confirmation: パスワード（確認）
         created_at: 登録日時
         updated_at: 更新日時
+      recipe:
+        name: レシピ名
+        description: レシピ概要
+        url: URL
+        image: レシピ画像
+        recipeYield: 何人分
+        cooktime: 調理時間
+      recipe/ingredients:
+        name: 材料・調味料
+        quantity_amount: 分量
+      recipe/steps:
+        body: 作り方
+      ingredient:
+        name: 材料・調味料
+        quantity_amount: 分量
+      step:
+        body: 作り方
   date:
     abbr_day_names:
     - 日
