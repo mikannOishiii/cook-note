@@ -24,6 +24,11 @@ ja:
         image: レシピ画像
         recipeYield: 何人分
         cooktime: 調理時間
+      recipe/ingredients:
+        name: 材料・調味料
+        quantity_amount: 分量
+      recipe/steps:
+        body: 作り方
       ingredient:
         name: 材料・調味料
         quantity_amount: 分量
