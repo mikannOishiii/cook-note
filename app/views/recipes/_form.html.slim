@@ -1,3 +1,8 @@
+- if @recipe.errors.present?
+  ul#error_explanation
+    - @recipe.errors.full_messages.each do |message|
+      li= message
+
 = form_with model: recipe, url: confirm_recipes_path(recipe), local: true do |f|
   .form-group
     = f.label :name, "レシピ名"
@@ -23,4 +28,3 @@
   = f.hidden_field :id
 
   = f.submit "確認する", class: "btn btn-primary"
-  
