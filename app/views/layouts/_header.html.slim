@@ -1,18 +1,21 @@
-header.navbar.navbar-fixed-top.navbar-inverse.bg-light
+header.navbar.navbar-expand-lg.navbar-light.bg-light
   .container
-    = link_to "sample app", root_path, id: "logo"
-    nav
-      ul.nav.navbar-right.justify-content-end
-        li.nav-item
-          = link_to "Home", root_path, class: "nav-link"
-        - if logged_in?
+    = link_to "cook-note", root_path, id: "logo", class: "navbar-brand"
+    button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      span.navbar-toggler-icon
+    nav.collapse.navbar-collapse.justify-content-end id="navbarNavDropdown"
+        ul.navbar-nav.navbar-right
           li.nav-item
-            = link_to "ユーザー一覧", users_path, class: "nav-link"
-          li.nav-item
-            = link_to "レシピ一覧", "#", class: "nav-link"
-          li.nav-item
-            = link_to "プロフィール", edit_user_path(current_user), class: "nav-link"
-          li.nav-item
-            = link_to "ログアウト", logout_path, method: :delete, class: "nav-link"
-        - else
-          li.nav-item = link_to "ログイン", login_path, class: "nav-link"
+            = link_to "Home", root_path, class: "nav-link"
+          - if logged_in?
+            - if current_user.admin?
+              li.nav-item
+                = link_to "ユーザー一覧", users_path, class: "nav-link"
+            li.nav-item
+              = link_to "レシピ一覧", root_path, class: "nav-link"
+            li.nav-item
+              = link_to "プロフィール", edit_user_path(current_user), class: "nav-link"
+            li.nav-item
+              = link_to "ログアウト", logout_path, method: :delete, class: "nav-link"
+          - else
+            li.nav-item = link_to "ログイン", login_path, class: "nav-link"
