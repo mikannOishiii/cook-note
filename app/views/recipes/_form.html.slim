@@ -6,16 +6,19 @@
 = form_with model: recipe, url: confirm_recipes_path(recipe), local: true do |f|
   .form-group
     = f.label :name, "レシピ名"
-    = f.text_field :name, class: 'form-control', id: "recipe_name"
+    = f.text_field :name, class: "form-control", id: "recipe_name"
   .form-group
     = f.label :description, "レシピ概要"
-    = f.text_field :description, class: 'form-control', id: "recipe_description"
+    = f.text_field :description, class: "form-control", id: "recipe_description"
+  .form-group
+    = f.label :image, "画像"
+    = f.file_field :image, class: "form-control"
   .form-group
     = f.label :recipeYield, "何人分"
-    = f.text_field :recipeYield, class: 'form-control', id: "recipe_recipeYield"
+    = f.text_field :recipeYield, class: "form-control", id: "recipe_recipeYield"
   .form-group
     = f.label :cooktime, "調理時間"
-    = f.number_field :cooktime, class: 'form-control', id: "recipe_cooktime"
+    = f.number_field :cooktime, class: "form-control", id: "recipe_cooktime"
 
   = f.fields_for :ingredients do |ingredient_field|
     = render "ingredient_fields", f: ingredient_field

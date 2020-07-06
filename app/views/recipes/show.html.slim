@@ -9,6 +9,9 @@ table.table.table-hover
       th= Recipe.human_attribute_name(:description)
       td= @recipe.description
     tr
+      th= Recipe.human_attribute_name(:image)
+      td= image_tag @recipe.image.variant(resize: "280x280") if @recipe.image.attached?
+    tr
       th= Recipe.human_attribute_name(:url)
       td= @recipe.url
     tr
