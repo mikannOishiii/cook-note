@@ -20,6 +20,7 @@ ja:
       recipe:
         name: レシピ名
         description: レシピ概要
+        image: 画像
         url: URL
         image: レシピ画像
         recipeYield: 何人分
