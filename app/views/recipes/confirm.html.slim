@@ -1,48 +1,59 @@
-h1 レシピ内容の確認
+.container
+  .row
+    .col-md-8.mb-5
+      h1 レシピ内容の確認
+      .recipe_confirm_section
+        table.table.table-hover
+          tbody
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:name)
+              td.col-10= @recipe.name
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:description)
+              td.col-10= @recipe.description
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:image)
+              td.col-10= image_tag @recipe.image.variant(resize: "280x280") if @recipe.image.attached?
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:url)
+              td.col-10= @recipe.url
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:recipeYield)
+              td.col-10= @recipe.recipeYield
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:cooktime)
+              td.col-10= @recipe.cooktime
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:ingredient_amounts)
+              td.col-10
+                p= @recipe.recipeYield
+                ul
+                  - @recipe.ingredients.each do |ingredient|
+                    li
+                      = ingredient.name
+                      |
+                        ： 
+                      = ingredient.quantity_amount
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:steps)
+              td.col-10
+                ol
+                  - @recipe.steps.each do |step|
+                    li= step.body
 
-table.table.table-hover
-  tbody
-    tr
-      th= Recipe.human_attribute_name(:name)
-      td= @recipe.name
-    tr
-      th= Recipe.human_attribute_name(:description)
-      td= simple_format(@recipe.description)
-    tr
-      th= Recipe.human_attribute_name(:image)
-      td= image_tag @recipe.image.variant(resize: "280x280") if @recipe.image.attached?
-    tr
-      th= Recipe.human_attribute_name(:url)
-      td= @recipe.url
-    tr
-      th= Recipe.human_attribute_name(:recipeYield)
-      td= @recipe.recipeYield
-    tr
-      th= Recipe.human_attribute_name(:cooktime)
-      td= "#{@recipe.cooktime} 分"
-    - @recipe.ingredients.each do |ingredient|
-      tr
-        th=
-        td= "#{ingredient.name}:#{ingredient.quantity_amount}"
-
-    - @recipe.steps.each do |step|
-      tr
-        th=
-        td= step.body
-
-= form_with model: @recipe, local: true do |f|
-  = f.hidden_field :name
-  = f.hidden_field :description
-  = f.hidden_field :url
-  = f.hidden_field :recipeYield
-  = f.hidden_field :cooktime
-  = f.fields_for :ingredients do |a|
-    = a.hidden_field :name
-    = a.hidden_field :quantity_amount
-    = a.hidden_field :_destroy
-  = f.fields_for :steps do |b|
-    = b.hidden_field :body
-    = b.hidden_field :_destroy
-     
-  = f.submit "戻る", name: "back", class: "btn btn-secondary mr-3"
-  = f.submit "登録", name: "save", class: "btn btn-primary"
+        .draft_box  
+          = form_with model: @recipe, local: true do |f|
+            = f.hidden_field :name
+            = f.hidden_field :description
+            = f.hidden_field :url
+            = f.hidden_field :recipeYield
+            = f.hidden_field :cooktime
+            = f.fields_for :ingredients do |a|
+              = a.hidden_field :name
+              = a.hidden_field :quantity_amount
+              = a.hidden_field :_destroy
+            = f.fields_for :steps do |b|
+              = b.hidden_field :body
+              = b.hidden_field :_destroy
+            = f.submit "保存する", name: "save", class: "btn recipe_create_btn"
+            = f.submit "修正する", name: "back", class: "btn recipe_create_btn bg-light"

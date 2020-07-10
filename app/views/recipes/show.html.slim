@@ -1,35 +1,48 @@
-h1 レシピ
+.container
+  .row
+    .col-md-8.mb-5
+      h1= @recipe.name
+      .recipe_confirm_section
+        table.table.table-hover
+          tbody
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:description)
+              td.col-10= @recipe.description
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:image)
+              td.col-10= image_tag @recipe.image.variant(resize: "280x280") if @recipe.image.attached?
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:url)
+              td.col-10= @recipe.url
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:recipeYield)
+              td.col-10= @recipe.recipeYield
+            tr.row
+              th.col-2= Recipe.human_attribute_name(:cooktime)
+              td.col-10= @recipe.cooktime
+            tr.row
+              th.col-2= Ingredient.human_attribute_name(:name)
+              td.col-10
+                p= @recipe.recipeYield
+                ul
+                  - @recipe.ingredients.each do |ingredient|
+                    li
+                      = ingredient.name
+                      |
+                        ： 
+                      = ingredient.quantity_amount
+            tr.row
+              th.col-2= Step.human_attribute_name(:body)
+              td.col-10
+                ol
+                  - @recipe.steps.each do |step|
+                    li= step.body
 
-table.table.table-hover
-  tbody
-    tr
-      th= Recipe.human_attribute_name(:name)
-      td= @recipe.name
-    tr
-      th= Recipe.human_attribute_name(:description)
-      td= @recipe.description
-    tr
-      th= Recipe.human_attribute_name(:image)
-      td= image_tag @recipe.image.variant(resize: "280x280") if @recipe.image.attached?
-    tr
-      th= Recipe.human_attribute_name(:url)
-      td= @recipe.url
-    tr
-      th= Recipe.human_attribute_name(:recipeYield)
-      td= @recipe.recipeYield
-    tr
-      th= Recipe.human_attribute_name(:cooktime)
-      td= @recipe.cooktime
-    - @recipe.ingredients.each do |ingredient|
-        tr
-          th=
-          td= "#{ingredient.name} : #{ingredient.quantity_amount}"
-    - @recipe.steps.each_with_index do |step, index|
-        tr
-          th= index + 1
-          td= step.body
-
-= link_to "編集", edit_recipe_path(@recipe), class: "btn btn-primary mr-3"
-= link_to "削除", @recipe, method: :delete,
-                          data: { confirm: "レシピ「#{@recipe.name}」を削除します。よろしいですか？" },
-                          class: "btn btn-danger"
+    .col-md-4.mb-5.mt-md-5
+      .sidebar-module
+        h4 レシピをつくる
+        .recipe_create_box.text-center.inner
+          = link_to "編集する", edit_recipe_path(@recipe), class: "btn recipe_create_btn"
+          = link_to "削除する", @recipe, method: :delete,
+                          data: { confirm: "レシピ「#{@recipe.name}」を削除します。よろしいですか？" }, class: "btn recipe_create_btn bg-light"
+          = link_to "一覧へ戻る", recipes_path, class: "btn recipe_create_btn"

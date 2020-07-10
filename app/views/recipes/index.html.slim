@@ -1,15 +1,31 @@
-h1 レシピ一覧
-
-table.table.table-hover
-  thead.thead-default
-    tr
-      th= Recipe.human_attribute_name(:name)
-      th
-      th
-  tbody
-    - @recipes.each do |recipe|
-      tr
-        td= link_to recipe.name, recipe
-        td
-          = link_to "編集", edit_recipe_path(recipe), class: "btn btn-primary mr-3"
-          = link_to "削除", recipe, method: :delete, data: { confirm: "削除してもよいですか？" }, class: "btn btn-danger"
+.conteainer
+  .row
+    .col-md-8.mb-5
+      h1 レシピ一覧
+      - @recipes.each do |recipe|
+        .card.flex-row.mb-2.pb2
+          .card-img-left.flex-auto
+            = link_to recipe_path(recipe) do
+              = image_tag recipe.image.variant(resize: "100x100") if recipe.image.attached?
+          .card-body.d-flex.flex-column.align-items-start
+            h2.recipe_heading
+              = link_to recipe.name, recipe_path(recipe)
+            .mb-1.text-muted
+              = link_to "編集", edit_recipe_path(recipe)
+              = " | "
+              = link_to "削除", recipe, method: :delete, data: { confirm: "削除してもよいですか？" }
+    .col-md-4.mb-5.mt-md-5
+      .sidebar-module
+        h4 レシピをつくる
+        .recipe_create_box.text-center.inner
+          = link_to "レシピを一からつくる", new_recipe_path, class: "btn recipe_create_btn"
+          = link_to "レシピを取り込む", new_recipe_path, class: "btn recipe_create_btn"
+      .sidebar-module
+        h4 キーワード
+        .keyword_list.inner
+      .sidebar-module
+        h4 カテゴリ
+        .keyword_list.inner
+      .sidebar-module
+        h4 関連レシピ
+        .related_recipes.inner

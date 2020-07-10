@@ -1,21 +1,25 @@
-header.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light
+header.navbar.fixed-top.navbar-expand-lg
   .container
     = link_to "cook-note", root_path, id: "logo", class: "navbar-brand"
     button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
       span.navbar-toggler-icon
-    nav.collapse.navbar-collapse.justify-content-end id="navbarNavDropdown"
-        ul.navbar-nav.navbar-right
+    nav.collapse.navbar-collapse.justify-content-end#navbarNavDropdown
+        ul.navbar-nav.navbar-right.align-items-center
+          = form_tag "#", method: "get", class: "form-inline" do
+              = text_field_tag :search, "", class: "form-control", placeholder: "レシピをさがす"
+              = submit_tag "検索", name: nil, class: "btn search-btn my-md-2"
           li.nav-item
             = link_to "Home", root_path, class: "nav-link"
           - if logged_in?
-            - if current_user.admin?
-              li.nav-item
-                = link_to "ユーザー一覧", users_path, class: "nav-link"
             li.nav-item
               = link_to "レシピ一覧", root_path, class: "nav-link"
-            li.nav-item
-              = link_to "プロフィール", edit_user_path(current_user), class: "nav-link"
-            li.nav-item
-              = link_to "ログアウト", logout_path, method: :delete, class: "nav-link"
+            li.nav-item.dropdown
+              = link_to "アカウント", "#", class: "nav-link dropdown-toggle", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expand: "fale" }
+              .dropdown-menu.dropdown-menu-right
+                - if current_user.admin?
+                  = link_to "ユーザー一覧", "#", class: "dropdown-item"
+                = link_to "マイプロフィール", "#", class: "dropdown-item"
+                .dropdown-divider
+                = link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item"
           - else
             li.nav-item = link_to "ログイン", login_path, class: "nav-link"

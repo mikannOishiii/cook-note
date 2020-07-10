@@ -1,8 +1,12 @@
 .nested-fields
-  = f.hidden_field :_destroy
-  = f.label :name
-  = f.text_field :name, class: "form-control", id: "ingredient_name"
-  = f.label :quantity_amount
-  = f.text_field :quantity_amount, class: "form-control", id: "ingredient_quantity_amount"
-  = link_to "削除", "#", class: "remove_fields"
+  .form-row
+    .col-5.my-1
+      = f.label :name, class: "sr-only"
+      = f.text_field :name, class: "form-control", id: "ingredient_name"
+    .col-5.my-1
+      = f.label :quantity_amount, class: "sr-only" 
+      = f.text_field :quantity_amount, class: "form-control", id: "ingredient_quantity"
+    = f.hidden_field :_destroy
+    .col-auto.my-1.text-right
+      = link_to "削除", "#", class: "btn remove_fields"
   

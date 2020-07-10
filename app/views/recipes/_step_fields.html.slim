@@ -1,6 +1,9 @@
 .nested-fields
-  = f.hidden_field :_destroy
-  = f.label :body
-  = f.text_field :body, class: "form-control", id: "step_body"
-  = link_to "削除", "#", class: "remove_fields"
+  .form-row
+    .col-10.my-1
+      = f.label :body, class: "sr-only"
+      = f.text_area :body, rows: "1", class: "form-control", id: "step_body"
+    = f.hidden_field :_destroy
+    .col-auto.my-1.text-right
+      = link_to "削除", "#", class: "btn remove_fields"
   

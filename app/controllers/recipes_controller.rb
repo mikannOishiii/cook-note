@@ -9,8 +9,8 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    3.times { @recipe.ingredients.build }
-    3.times { @recipe.steps.build }
+    @recipe.ingredients.build
+    @recipe.steps.build
   end
 
   def confirm
