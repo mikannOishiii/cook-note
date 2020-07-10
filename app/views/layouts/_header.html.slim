@@ -2,7 +2,7 @@ header.navbar.fixed-top.navbar-expand-lg
   .container
     = link_to "cook-note", root_path, id: "logo", class: "navbar-brand"
     button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-      span.navbar-toggler-icon
+      i.fas.fa-bars.text-white.fa-lg.fa-inverse
     nav.collapse.navbar-collapse.justify-content-end#navbarNavDropdown
         ul.navbar-nav.navbar-right.align-items-center
           = form_tag "#", method: "get", class: "form-inline" do
