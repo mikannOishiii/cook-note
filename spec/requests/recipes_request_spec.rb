@@ -11,12 +11,6 @@ RSpec.describe "Recipes", type: :request do
     end
   end
 
-  describe "GET /confirm" do
-    subject { post confirm_recipes_url, params: { recipe: attributes_for(:recipe) } }
-
-    it { is_expected.to eq 200 }
-  end
-
   describe "POST #create" do
     context "パラメータが妥当な場合" do
       subject { post recipes_url, params: { recipe: attributes_for(:recipe) } }

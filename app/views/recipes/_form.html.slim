@@ -3,7 +3,7 @@
     - @recipe.errors.full_messages.each do |message|
       li= message
 
-= form_with model: recipe, url: confirm_recipes_path(recipe), local: true do |f|
+= form_with model: recipe, local: true do |f|
 
   .recipe_child_section
     h2.recipe_heading レシピ名
@@ -59,4 +59,4 @@
   = f.hidden_field :user_id, value: current_user.id
 
   .draft_box
-    = f.submit "確認する", class: "btn recipe_create_btn"
+    = f.submit "保存する", class: "btn recipe_create_btn"
