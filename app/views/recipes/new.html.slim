@@ -1,3 +1,12 @@
-h1 レシピ作成フォーム
+.conteainer
+  .row
+    .col-md-8.mb-5
+      h1 レシピをつくる
+      .recipe_section
+        = render "form", recipe: @recipe
 
-= render "form", recipe: @recipe
+    .col-md-4.mb-5.mt-md-5
+      .sidebar-module
+        h4 インポートはこちら
+        .recipe_create_box.text-center.inner
+          = link_to "レシピをインポートする", "#", class: "btn recipe_create_btn"

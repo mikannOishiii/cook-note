@@ -3,7 +3,7 @@ FactoryBot.define do
     name { "MyString" }
     description { "MyString" }
     url { "" }
-    image { "" }
+    image { nil }
     recipeYield { "2〜3人分" }
     cooktime { 10 }
     association :user

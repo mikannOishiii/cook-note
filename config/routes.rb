@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :recipes do
-    post  :confirm, on: :collection
-  end
+  resources :recipes
   root 'static_pages#home'
   resources :users
   get  '/signup',  to: 'users#new'

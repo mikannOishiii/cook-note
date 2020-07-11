@@ -9,26 +9,12 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    3.times { @recipe.ingredients.build }
-    3.times { @recipe.steps.build }
-  end
-
-  def confirm
-    @recipe = current_user.recipes.build(recipe_params)
-
-    # エラーがあれば編集画面へ戻す
-    unless @recipe.valid?
-      render 'new'
-    end
+    @recipe.ingredients.build
+    @recipe.steps.build
   end
 
   def create
     @recipe = current_user.recipes.build(recipe_params)
-    
-    if params[:back].present?
-      render :new
-      return
-    end
 
     if @recipe.save
       flash[:success] = "レシピを作成しました"

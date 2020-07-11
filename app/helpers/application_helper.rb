@@ -13,6 +13,6 @@ module ApplicationHelper
     end
 
     # This renders a simple link, but passes information into `data` attributes.
-    link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+    link_to(name, '#', class: "add_fields btn", data: {id: id, fields: fields.gsub("\n", "")})
   end
 end

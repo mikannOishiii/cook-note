@@ -1,33 +1,62 @@
 - if @recipe.errors.present?
-  ul#error_explanation
+  ul#error_explanation.alert-danger
     - @recipe.errors.full_messages.each do |message|
       li= message
 
-= form_with model: recipe, url: confirm_recipes_path(recipe), local: true do |f|
-  .form-group
-    = f.label :name, "レシピ名"
-    = f.text_field :name, class: "form-control", id: "recipe_name"
-  .form-group
-    = f.label :description, "レシピ概要"
-    = f.text_field :description, class: "form-control", id: "recipe_description"
-  .form-group
-    = f.label :image, "画像"
-    = f.file_field :image, class: "form-control"
-  .form-group
-    = f.label :recipeYield, "何人分"
-    = f.text_field :recipeYield, class: "form-control", id: "recipe_recipeYield"
-  .form-group
-    = f.label :cooktime, "調理時間"
-    = f.number_field :cooktime, class: "form-control", id: "recipe_cooktime"
+= form_with model: recipe, local: true do |f|
 
-  = f.fields_for :ingredients do |ingredient_field|
-    = render "ingredient_fields", f: ingredient_field
-  = link_to_add_fields "材料を追加", f, :ingredients
+  .recipe_child_section
+    h2.recipe_heading レシピ名
+    .form-group
+      = f.label :name, "レシピ名", class: "sr-only"
+      = f.text_field :name, class: "form-control", id: "recipe_name"
 
-  = f.fields_for :steps do |step_field|
-    = render "step_fields", f: step_field
-  = link_to_add_fields "作り方を追加", f, :steps
+  .recipe_child_section
+    h2.recipe_heading レシピ概要
+    .form-group
+      = f.label :description, "レシピ概要", class: "sr-only"
+      = f.text_area :description, rows: 2, class: "form-control", id: "recipe_description"
+
+  .recipe_child_section
+    h2.recipe_heading レシピ画像
+    .form-group
+      = f.label :image, "画像", class: "sr-only"
+      = f.file_field :image, class: "form-control", id: "recipe_image"
+
+  .recipe_child_section
+    h2.recipe_heading 材料
+    .ingredients_list.bg-light
+      .servings_container.form-inline
+        = f.text_field :recipeYield, class: "form-control", id: "recipe_recipeYield", placeholder: "何人分"
+        span.ml-2 例）2人分
+      .list_header.row
+        span.col-5.text-center.ingredient_name 材料・調味料
+        span.col-5.text-center.ingredient_quantity 分量
+      .edit_ingredients_list
+        = f.fields_for :ingredients do |ingredient_field|
+          = render "ingredient_fields", f: ingredient_field
+      .add_field.text-center
+        = link_to_add_fields "材料を追加", f, :ingredients
+
+  .recipe_child_section
+    h2.recipe_heading 調理時間
+    .form-inline
+      .form-group
+        = f.label :cooktime, "調理時間", class: "sr-only"
+        = f.number_field :cooktime, class: "form-control", id: "recipe_cooktime", placeholder: "15"
+      span.ml-2 分
+
+
+  .recipe_child_section
+    h2.recipe_heading 作り方
+    .edit_steps_list.bg-light
+      = f.fields_for :steps do |step_field|
+        = render "step_fields", f: step_field
+      .add_field.text-center
+        = link_to_add_fields "作り方を追加", f, :steps
 
   = f.hidden_field :id
+  = f.hidden_field :user_id, value: current_user.id
 
-  = f.submit "確認する", class: "btn btn-primary"
+  .draft_box
+    = f.submit "保存する", class: "btn recipe_create_btn"
