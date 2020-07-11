@@ -17,6 +17,10 @@ class RecipesController < ApplicationController
     
   end
 
+  def confirm
+
+  end
+
   def create
     @recipe = current_user.recipes.build(recipe_params)
 
