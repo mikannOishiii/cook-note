@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :recipes
+  resources :recipes do
+    get :import, on: :collection
+  end
   root 'static_pages#home'
   resources :users
   get  '/signup',  to: 'users#new'

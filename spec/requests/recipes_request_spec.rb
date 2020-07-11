@@ -11,6 +11,13 @@ RSpec.describe "Recipes", type: :request do
     end
   end
 
+  describe "GET /import" do
+    it "リクエストが成功すること" do
+      get import_recipes_url
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "POST #create" do
     context "パラメータが妥当な場合" do
       subject { post recipes_url, params: { recipe: attributes_for(:recipe) } }

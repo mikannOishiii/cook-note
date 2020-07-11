@@ -13,6 +13,10 @@ class RecipesController < ApplicationController
     @recipe.steps.build
   end
 
+  def import
+    
+  end
+
   def create
     @recipe = current_user.recipes.build(recipe_params)
 
