@@ -12,4 +12,18 @@ class Recipe < ApplicationRecord
   validates :description, length: { maximum: 140 }
   validates :url,   format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
   validates :cooktime,      numericality: { only_integer: true }, allow_blank: true
+
+  def grab_image(url)
+    require 'open-uri'
+    downloaded_image = open(url)
+    self.image.attach(io: downloaded_image  , filename: "foo.jpg")
+  end
+
+  def minTosec
+    if self.last == "S"
+      self.gsub!("PT", "").gsub!("S", "").to_i / 60
+    else
+      self.gsub!("PT", "").gsub!("M", "").to_i
+    end
+  end
 end

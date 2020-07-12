@@ -1,0 +1,77 @@
+= form_with model: recipe, local: true do |f|
+
+  .recipe_child_section
+    h2.recipe_heading レシピ名
+    .form-group
+      = f.label :name, "レシピ名", class: "sr-only"
+      = f.text_field :name, class: "form-control", id: "recipe_name", value: elements["name"]
+
+  .recipe_child_section
+    h2.recipe_heading レシピ概要
+    .form-group
+      = f.label :description, "レシピ概要", class: "sr-only"
+      = f.text_area :description, rows: 2, class: "form-control", id: "recipe_description", value: elements["description"]
+
+  .recipe_child_section
+    h2.recipe_heading レシピ画像
+    .form-group
+      = f.label :image, "画像", class: "sr-only"
+      = f.file_field :image, class: "form-control", id: "recipe_image"
+
+  .recipe_child_section
+    h2.recipe_heading 材料
+    .ingredients_list.bg-light
+      .servings_container.form-inline
+        = f.text_field :recipeYield, class: "form-control", id: "recipe_recipeYield", placeholder: "何人分", value: elements["recipeYield"].gsub!("servings","人分")
+        span.ml-2 例）2人分
+      .list_header.row
+        span.col-5.text-center.ingredient_name 材料・調味料
+        span.col-5.text-center.ingredient_quantity 分量
+      .edit_ingredients_list
+        
+        = f.fields_for :ingredients do |ingredient_field|
+          .nested-fields
+            .form-row
+              - elements["recipeIngredient"].each do |ingredient|
+                .col-5.my-1
+                  = f.label :name, class: "sr-only"
+                  = f.text_field :name, class: "form-control", id: "ingredient_name", value: ingredient.split(" ")[0]
+                .col-5.my-1
+                  = f.label :quantity_amount, class: "sr-only" 
+                  = f.text_field :quantity_amount, class: "form-control", id: "ingredient_quantity", value: ingredient.split(" ")[1]
+              = f.hidden_field :_destroy
+              .col-auto.my-1.text-right
+                = link_to "削除", "#", class: "btn remove_fields"
+      .add_field.text-center
+        = link_to_add_fields "材料を追加", f, :ingredients
+
+  .recipe_child_section
+    h2.recipe_heading 調理時間
+    .form-inline
+      .form-group
+        = f.label :cooktime, "調理時間", class: "sr-only"
+        = f.number_field :cooktime, class: "form-control", id: "recipe_cooktime", placeholder: "15", value: elements["cooktime"]
+      span.ml-2 分
+
+
+  .recipe_child_section
+    h2.recipe_heading 作り方
+    .edit_steps_list.bg-light
+      - elements["recipeInstructions"].map { |str| str["text"] }.each do |step|
+        = f.fields_for :steps do |step_field|
+          .nested-fields
+            .form-row
+              .col-10.my-1
+                = f.label :body, class: "sr-only"
+                = f.text_area :body, rows: "1", class: "form-control", id: "step_body", value: step
+              = f.hidden_field :_destroy
+              .col-auto.my-1.text-right
+                = link_to "削除", "#", class: "btn remove_fields"
+    .add_field.text-center
+      = link_to_add_fields "作り方を追加", f, :steps
+
+  = f.hidden_field :id
+  = f.hidden_field :user_id, value: current_user.id
+
+  .draft_box
+    = f.submit "保存する", class: "btn recipe_create_btn"

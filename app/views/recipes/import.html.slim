@@ -5,19 +5,35 @@
       .recipe_section
         .recipe_child_section
           h2.recipe_heading URLを入力
-          = form_tag "#", method: "get", class: "import_form" do
-              = text_field_tag :search, "", class: "form-control mb-3", placeholder: "https://example.com レシピURLを入力"
-              = submit_tag "レシピを取り込む", name: nil, class: "btn recipe_create_btn"
+          = form_with url: confirm_recipes_path, class: "import_form", local: true do |f|
+            = f.text_field :url, class: "form-control mb-3", placeholder: "https://example.com レシピURLを入力"
+            = f.submit "レシピを取り込む", class: "btn recipe_create_btn"
 
     .col-md-4.mb-5.mt-md-5
       .sidebar-module
         h4 インポート対応サイト
         ul.list-group.list-group-flush
-          li.list-group-item cookpad（クックパッド）
-          li.list-group-item DELISH KICHEN（デリッシュキッチン）
-          li.list-group-item kurashiru（クラシル）
+          li.list-group-item 
+            |
+              cookpad（クックパッド）
+            = link_to "https://cookpad.com/", { target: "_blank" } do
+              i.fas.fa-external-link-alt
+          li.list-group-item 
+            |
+              DELISH KICHEN（デリッシュキッチン）
+            = link_to "https://delishkitchen.tv/", { target: "_blank" } do
+              i.fas.fa-external-link-alt
+          li.list-group-item
+            |
+              kurashiru（クラシル）
+            = link_to "https://www.kurashiru.com/", { target: "_blank" } do
+              i.fas.fa-external-link-alt
+          li.list-group-item
+            |
+              E・レシピ（イーレシピ）
+            = link_to "https://erecipe.woman.excite.co.jp/", { target: "_blank" } do
+              i.fas.fa-external-link-alt
       .sidebar-module
         h4 いちからつくるはこちら
         .recipe_create_box.text-center.inner
           = link_to "レシピをいちからつくる", "#", class: "btn recipe_create_btn"
-          

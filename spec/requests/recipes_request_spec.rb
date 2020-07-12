@@ -11,13 +11,6 @@ RSpec.describe "Recipes", type: :request do
     end
   end
 
-  describe "GET /import" do
-    it "リクエストが成功すること" do
-      get import_recipes_url
-      expect(response).to have_http_status(:success)
-    end
-  end
-
   describe "POST #create" do
     context "パラメータが妥当な場合" do
       subject { post recipes_url, params: { recipe: attributes_for(:recipe) } }
@@ -88,5 +81,42 @@ RSpec.describe "Recipes", type: :request do
     it { expect { subject }.to change(Recipe, :count).by(-1) }
 
     it { is_expected.to redirect_to recipes_url }
+  end
+
+  describe "GET /import" do
+    it "リクエストが成功すること" do
+      get import_recipes_url
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "POST #confirm" do
+    # 材料3つ、作り方6つのレシピ
+    let(:valid_url) { "https://cookpad.com/recipe/5336469" }
+    let(:invalid_url) { "https://www.orangepage.net/recipes/detail_124803" }
+
+    context "パラメータが妥当な場合" do
+      subject { post confirm_recipes_url, params: { url: valid_url } }
+
+      it { is_expected.to eq 302 }
+      it { expect { subject }.to change(Recipe, :count).by(1) }
+      it { expect { subject }.to change(Ingredient, :count).by(3) }
+      it { expect { subject }.to change(Step, :count).by(6) }
+      it { is_expected.to redirect_to Recipe.last }
+    end
+
+    context "パラメータが不当な場合" do
+      subject { post confirm_recipes_url, params: { url: invalid_url } }
+
+      it { is_expected.to eq 200 }
+      it { expect { subject }.not_to change(Recipe, :count) }
+      it { expect { subject }.not_to change(Ingredient, :count) }
+      it { expect { subject }.not_to change(Step, :count) }
+      
+      it "エラーが表示されること" do
+        subject
+        expect(response.body).to include "このURLはインポートに対応していません"
+      end
+    end
   end
 end

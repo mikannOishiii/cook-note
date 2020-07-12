@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :recipes do
-    get :import, :confirm, on: :collection
+    collection do
+      get :import
+      post :confirm
+    end
   end
   root 'static_pages#home'
   resources :users

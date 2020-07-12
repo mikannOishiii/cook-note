@@ -2,8 +2,44 @@
   .row
     .col-md-8.mb-5
       h1 インポートの確認
+      / .recipe_confirm_section
+      /   table.table.table-hover
+      /     tbody
+      /       tr.row
+      /         th.col-2= Recipe.human_attribute_name(:name)
+      /         td.col-10= @elements["name"]
+      /       tr.row
+      /         th.col-2= Recipe.human_attribute_name(:description)
+      /         td.col-10= @elements["description"]
+      /       tr.row
+      /         th.col-2= Recipe.human_attribute_name(:image)
+      /         td.col-10= image_tag @elements["image"][0], width: "280", height: "280"
+      /         / td.col-10= image_tag @recipe.image.variant(resize: "280x280") if @recipe.image.attached?
+      /       tr.row
+      /         th.col-2= Recipe.human_attribute_name(:url)
+      /         td.col-10= @elements["mainEntityOfPage"]["@id"]
+      /       tr.row
+      /         th.col-2= Recipe.human_attribute_name(:cooktime)
+      /         td.col-10= @elements["cooktime"]
+      /       tr.row
+      /         th.col-2= Ingredient.human_attribute_name(:name)
+      /         td.col-10
+      /           p= @elements["recipeYield"]
+      /           ul
+      /             - @elements["recipeIngredient"].each do |ingredient|
+      /               li
+      /                 = ingredient.split(" ")[0]
+      /                 |
+      /                   ： 
+      /                 = ingredient.split(" ")[1]
+      /       tr.row
+      /         th.col-2= Step.human_attribute_name(:body)
+      /         td.col-10
+      /           ol
+      /             - @elements["recipeInstructions"].each do |step|
+      /               li= step["text"]
       .recipe_section
-        = render "form", recipe: @recipe
+        = render "elements", elements: @elements, recipe: @recipe
 
     .col-md-4.mb-5.mt-md-5
       .sidebar-module
