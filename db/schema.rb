@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_05_090017) do
+ActiveRecord::Schema.define(version: 2020_07_13_024539) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2020_07_05_090017) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "user_id"], name: "index_categories_on_name_and_user_id", unique: true
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
   create_table "ingredients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "quantity_amount", null: false
@@ -41,6 +50,16 @@ ActiveRecord::Schema.define(version: 2020_07_05_090017) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recipe_id", "created_at"], name: "index_ingredients_on_recipe_id_and_created_at"
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
+  end
+
+  create_table "recipe_category_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.integer "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_recipe_category_relations_on_category_id"
+    t.index ["recipe_id", "category_id"], name: "index_recipe_category_relations_on_recipe_id_and_category_id", unique: true
+    t.index ["recipe_id"], name: "index_recipe_category_relations_on_recipe_id"
   end
 
   create_table "recipes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -82,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_07_05_090017) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "categories", "users"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "recipes", "users"
   add_foreign_key "steps", "recipes"

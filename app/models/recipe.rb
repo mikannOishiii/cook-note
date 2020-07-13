@@ -1,5 +1,7 @@
 class Recipe < ApplicationRecord
   belongs_to  :user
+  has_many    :categories, through: :recipe_category_relations
+  has_many    :recipe_category_relations, dependent: :destroy
   has_many    :ingredients,  dependent: :destroy
   has_many    :steps,        dependent: :destroy
   has_one_attached :image
