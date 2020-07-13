@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   before_action :check_url, only: [:confirm]
+  before_action :redirect_login
 
   def show
     @recipe = Recipe.find(params[:id])
@@ -144,6 +145,13 @@ class RecipesController < ApplicationController
     unless authorized_url.any? { |url| input_url.include?(url) }
       flash.now[:danger] = "このURLはインポートに対応していません"
       render :import
+    end
+  end
+
+  def redirect_login
+    unless logged_in?
+      flash[:dangeer] = "ログインしてください"
+      recirect_to login_url
     end
   end
 

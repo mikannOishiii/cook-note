@@ -6,6 +6,7 @@
         .recipe_child_section
           h2.recipe_heading URLを入力
           = form_with url: confirm_recipes_path, class: "import_form", local: true do |f|
+            = f.label :url, "URL", class: "sr-only"
             = f.text_field :url, class: "form-control mb-3", placeholder: "https://example.com レシピURLを入力"
             = f.submit "レシピを取り込む", class: "btn recipe_create_btn"
 

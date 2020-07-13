@@ -27,6 +27,7 @@
     h2.recipe_heading 材料
     .ingredients_list.bg-light
       .servings_container.form-inline
+        = f.label :recipeYield, "何人分", class: "sr-only"
         = f.text_field :recipeYield, class: "form-control", id: "recipe_recipeYield", placeholder: "何人分"
         span.ml-2 例）2人分
       .list_header.row
