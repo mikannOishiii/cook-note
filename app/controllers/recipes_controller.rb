@@ -56,14 +56,18 @@ class RecipesController < ApplicationController
     agent = Mechanize.new
     page = agent.get(params[:url])
 
+    # application/ld+jsonでレシピ定義されている部分を取得
     if params[:url].include?("delishkitchen")
       js = page.search('script[type="application/ld+json"]')[1].text
     else
       js = page.at('script[type="application/ld+json"]').text
     end
 
+    # JSON形式に変換して各パーツを取得
     elements = JSON[js]
     recipe = current_user.recipes.build
+
+    #以下、レシピの各パーツを取得
     recipe.name = elements["name"]
     recipe.description = elements["description"]
 
