@@ -67,18 +67,21 @@ class RecipesController < ApplicationController
     recipe.name = elements["name"]
     recipe.description = elements["description"]
 
+    # URL取得
     if elements["mainEntityOfPage"].instance_of?(String)
       recipe.url = elements["mainEntityOfPage"]
     else
       recipe.url = elements["mainEntityOfPage"]["@id"]
     end
 
+    # 何人分のレシピか取得
     if elements["recipeYield"].include?("servings")
       recipe.recipeYield = elements["recipeYield"].gsub!("servings","人分")
     else
       recipe.recipeYield = elements["recipeYield"]
     end
-    
+
+    # 調理時間取得（リファクタリングできそう、あとで取り組みたい）    
     if elements["totalTime"].present?
       if elements["totalTime"].last == "S"
         recipe.cooktime = elements["totalTime"].gsub!("PT", "").gsub!("S", "").to_i / 60
@@ -99,6 +102,7 @@ class RecipesController < ApplicationController
       recipe.cooktime = ""
     end
 
+    # イメージ画像取得
     if elements["image"].instance_of?(Array)
       recipe.grab_image(elements["image"].first)
     elsif elements["image"].instance_of?(Hash)
@@ -107,8 +111,10 @@ class RecipesController < ApplicationController
       recipe.grab_image(elements["image"])
     end
     
+    # レシピ保存
     recipe.save
 
+    # 材料とその分量取得
     elements["recipeIngredient"].each do |ingredient|
       ingredient = recipe.ingredients.build(
         name: ingredient.split(" ")[0],
@@ -116,6 +122,7 @@ class RecipesController < ApplicationController
       ingredient.save
     end
 
+    # 作り方取得
     if elements["recipeInstructions"].instance_of?(String)
       how_to_steps = elements["recipeInstructions"].split("作り方")
       how_to_steps.each do |instruction|
@@ -129,11 +136,13 @@ class RecipesController < ApplicationController
       end
     end
 
+    # すべて保存できたら完了させてshowに飛ばす
     flash[:success] = "レシピを作成しました"
     redirect_to recipe
 
   end
 
+  # 対象URLが入力したURLに含まれなかったらインポートしない
   def check_url
     input_url = params[:url]
     authorized_url = [
@@ -148,6 +157,7 @@ class RecipesController < ApplicationController
     end
   end
 
+  # ログインしてなかったらログインページにリダイレクト
   def redirect_login
     unless logged_in?
       flash[:dangeer] = "ログインしてください"
