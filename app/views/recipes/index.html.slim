@@ -19,7 +19,7 @@
         h4 レシピをつくる
         .recipe_create_box.text-center.inner
           = link_to "レシピを一からつくる", new_recipe_path, class: "btn recipe_create_btn"
-          = link_to "レシピを取り込む", new_recipe_path, class: "btn recipe_create_btn"
+          = link_to "レシピを取り込む", import_recipes_path, class: "btn recipe_create_btn"
       .sidebar-module
         h4 キーワード
         .keyword_list.inner

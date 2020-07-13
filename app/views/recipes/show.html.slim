@@ -13,7 +13,7 @@
               td.col-10= image_tag @recipe.image.variant(resize: "280x280") if @recipe.image.attached?
             tr.row
               th.col-2= Recipe.human_attribute_name(:url)
-              td.col-10= @recipe.url
+              td.col-10= link_to @recipe.url, @recipe.url, { target: "_blank" }
             tr.row
               th.col-2= Recipe.human_attribute_name(:recipeYield)
               td.col-10= @recipe.recipeYield
