@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :categories, on: :collection
+  resources :categories
   resources :recipes do
     collection do
       get :import
