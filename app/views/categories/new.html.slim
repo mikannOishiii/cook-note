@@ -1,0 +1,22 @@
+.conteainer
+  .row
+    .col-md-8.mb-5
+      h1 カテゴリをつくる
+      .recipe_section
+        = render "form", category: @category
+
+        .recipe_child_section
+          h2.recipe_heading カテゴリ一覧
+          ul
+            - if @categories.present?
+              - @categories.each do |category|
+                li
+                  = category.name
+                  = link_to "編集", edit_category_path(category)
+                  = link_to "削除", category, method: :delete, data: { confirm: "削除してもよいですか？" }
+
+    .col-md-4.mb-5.mt-md-5
+      .sidebar-module
+        h4 インポートはこちら
+        .recipe_create_box.text-center.inner
+          = link_to "レシピをインポートする", import_recipes_path, class: "btn recipe_create_btn"

@@ -1,0 +1,10 @@
+- if @category.errors.present?
+  ul#error_explanation.alert-danger
+    - @category.errors.full_messages.each do |message|
+      li= message
+.recipe_child_section
+  h2.recipe_heading カテゴリ名を編集
+  = form_with model: @category, class: "import_form", local: true do |f|
+    = f.label :name, "カテゴリ名", class: "sr-only"
+    = f.text_field :name, class: "form-control mb-3", placeholder: "ごはんもの、豚肉、など"
+    = f.submit "保存する", class: "btn recipe_create_btn"
