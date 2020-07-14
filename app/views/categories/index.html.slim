@@ -1,0 +1,17 @@
+.conteainer
+  .row
+    .col-md-8.mb-5
+      h1 カテゴリ一覧
+      .recipe_section
+        .recipe_child_section
+          h2.recipe_heading URLを入力
+          = form_with url: confirm_recipes_path, class: "import_form", local: true do |f|
+            = f.label :url, "URL", class: "sr-only"
+            = f.text_field :url, class: "form-control mb-3", placeholder: "カテゴリ名を入力"
+            = f.submit "カテゴリを作る", class: "btn recipe_create_btn"
+
+    .col-md-4.mb-5.mt-md-5
+      .sidebar-module
+        h4 インポートはこちら
+        .recipe_create_box.text-center.inner
+          = link_to "レシピをインポートする", import_recipes_path, class: "btn recipe_create_btn"

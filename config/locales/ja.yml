@@ -35,6 +35,8 @@ ja:
         quantity_amount: 分量
       step:
         body: 作り方
+      category:
+        name: カテゴリ名
   date:
     abbr_day_names:
     - 日
